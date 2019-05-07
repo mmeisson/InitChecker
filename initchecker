@@ -389,17 +389,13 @@ function systempart()
 	sleep 0.5
 
 	#question 22
-	cat 22 | grep "adduser" > /dev/null
-	if [ $? ==  0 ]; then
-		echo -e "22 $_GREEN[OK] $_DEF"
-	else
-		cat 22 | grep "useradd" > /dev/null
-		if [ $? ==  0 ]; then
-			echo -e "22 $_GREEN[OK] $_DEF"
-		else
+	RES=$(cat 22 | xargs)
+	case $RES in
+		"adduser*" | "useradd*")
+			echo -e "22 $_GREEN[OK] $_DEF";;
+		*)
 			echo -e "22 $_RED[KO] $_DEF"
-		fi
-	fi
+	esac
 	sleep 0.5
 	#question 23
 	ES=$(cat 23) > /dev/null
