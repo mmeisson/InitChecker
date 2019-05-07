@@ -237,22 +237,17 @@ function systempart()
 	fi
 	sleep 0.5
 	#question 5
-	cat 05 | grep "/etc/init.d/ssh" > /dev/null
-	if [ $? ==  0 ]; then
-		echo -e "05 $_GREEN[OK] $_DEF"
-	else
-		cat 05 | grep "service ssh status" > /dev/null
-		if [ $? ==  0 ]; then
-			echo -e "05 $_GREEN[OK] $_DEF"
-		else
-			cat 05 | grep "service sshd status" > /dev/null
-			if [ $? ==  0 ]; then
-				echo -e "05 $_GREEN[OK] $_DEF"
-			else
-				echo -e "05 $_RED[KO] $_DEF"
-			fi
-		fi
-	fi
+	RES=$(cat 05 | xargs)
+	case $RES in
+		"/etc/init.d/ssh"* \
+				| "service ssh status" \
+				| "service sshd status" \
+				| "systemctl status ssh" \
+				| "systemctl status sshd")
+			echo -e "05 $_GREEN[OK] $_DEF";;
+		*)
+			echo -e "05 $_RED[KO] $_DEF"::
+	esac
 	sleep 0.5
 	#question 6
 	cat 06 | grep "/etc/init.d/ssh" > /dev/null
