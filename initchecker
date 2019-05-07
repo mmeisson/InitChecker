@@ -391,7 +391,7 @@ function systempart()
 	#question 22
 	RES=$(cat 22 | xargs)
 	case $RES in
-		"adduser*" | "useradd*")
+		"adduser"* | "useradd"*)
 			echo -e "22 $_GREEN[OK] $_DEF";;
 		*)
 			echo -e "22 $_RED[KO] $_DEF"
