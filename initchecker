@@ -97,7 +97,7 @@ function networkpart()
 	sleep .5
 	#question 5
 	RES=$(sh 05)
-	RRES=$(nslookup slash16.org | grep 'Server' | awk '{print$2}')
+	RRES=$(nslookup slash16.org | awk '/Server/ {print$2}')
 	if [ "$RES" == "$RRES" ]; then
 		echo -e "05 $_GREEN[OK] $_DEF"
 	else
