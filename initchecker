@@ -57,8 +57,8 @@ function networkpart()
 {
 	cd "$PATHE/network/"
 	#question 1
-	RES=$(sh 01)
-	RRES=$(ifconfig -l)
+	RES=$(sh 01 | xargs | sort)
+	RRES=$(ifconfig -l | xargs | sort)
 	if [ "$RES" == "$RRES" ]; then
 		echo -e "01 $_GREEN[OK] $_DEF"
 	else
