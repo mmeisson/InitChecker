@@ -141,24 +141,18 @@ function networkpart()
 	sleep .5
 	#question 9
 	RES=$(cat 09)
-	grep "163.172.250.12" 09 > /dev/null
-	if [ $? ==  0 ]; then
-		echo -e "09 $_GREEN[OK] $_DEF"
-	else
-		grep "163.172.250.13" 09 > /dev/null
-		if [ $? ==  0 ]; then
-			echo -e "08 $_GREEN[OK] $_DEF"
-		else	
-			grep "163.172.250.11" 09 > /dev/null
-			if [ $? ==  0 ]; then
-				echo -e "09 $_GREEN[OK] $_DEF"
-			else	
-				echo -e "09 $_RED[KO] $_DEF"
-				echo -en "you wrote this :  "
-				echo -e " $RES"
-			fi
-		fi
-	fi
+	case $RES in
+		*"163.172.250.11"*)
+			echo -e "09 $_GREEN[OK] $_DEF";;
+		*"163.172.250.12"*)
+			echo -e "09 $_GREEN[OK] $_DEF";;
+		*"163.172.250.13"*)
+			echo -e "09 $_GREEN[OK] $_DEF";;
+		*)
+			echo -e "09 $_RED[KO] $_DEF"
+			echo -en "you wrote this :  "
+			echo -e " $RES"
+	esac
 	sleep .5
 	#question 10
 	cat 10 | grep "traceroute slash16.org" > /dev/null
