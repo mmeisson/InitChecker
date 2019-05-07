@@ -142,11 +142,9 @@ function networkpart()
 	#question 9
 	RES=$(cat 09)
 	case $RES in
-		*"163.172.250.11"*)
-			echo -e "09 $_GREEN[OK] $_DEF";;
-		*"163.172.250.12"*)
-			echo -e "09 $_GREEN[OK] $_DEF";;
-		*"163.172.250.13"*)
+		*"163.172.250.11"* \
+				| *"163.172.250.12"* \
+				| *"163.172.250.13"*)
 			echo -e "09 $_GREEN[OK] $_DEF";;
 		*)
 			echo -e "09 $_RED[KO] $_DEF"
