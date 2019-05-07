@@ -306,17 +306,13 @@ function systempart()
 	fi
 	sleep 0.5
 	#question 13
-	cat 13 | grep "ps -aux" > /dev/null
-	if [ $? ==  0 ]; then
-		echo -e "13 $_GREEN[OK] $_DEF"
-	else
-		cat 13 | grep "top" > /dev/null
-		if [ $? ==  0 ]; then
-			echo -e "13 $_GREEN[OK] $_DEF"
-		else	
-			 echo -e "13 $_RED[KO] $_DEF"
-		fi
-	fi
+	RES=$(cat 13 | xargs)
+	case $RES in
+		"ps *-aux" | "top")
+		echo -e "13 $_GREEN[OK] $_DEF";;
+	*)
+		 echo -e "13 $_RED[KO] $_DEF";;
+	esac
 	sleep 0.5
 	#question 14
 	cat 14 | grep "tail -f /var/log/syslog &" > /dev/null
