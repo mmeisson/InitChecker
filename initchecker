@@ -315,7 +315,7 @@ function systempart()
 	esac
 	sleep 0.5
 	#question 14
-	cat 14 | grep "tail -f /var/log/syslog &" > /dev/null
+	cat 14 | xargs | grep "tail -f /var/log/syslog &" > /dev/null
 	if [ $? ==  0 ]; then
 		echo -e "14 $_GREEN[OK] $_DEF"
 	else
