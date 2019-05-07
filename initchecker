@@ -273,21 +273,13 @@ function systempart()
 	sleep 0.5
 	#question 9
 	cat 09 | grep "w" > /dev/null
-	if [ $? ==  0 ]; then
-		echo -e "09 $_GREEN[OK] $_DEF"
-	else
-		cat 09 | grep "who" > /dev/null
-		if [ $? == 0 ]; then
-			echo -e "09 $_GREEN[OK] $_DEF"
-		else
-			cat 09 | grep "users" > /dev/null
-			if [ $? == 0 ]; then
-				echo -e "09 $_GREEN[OK] $_DEF"
-			else
-				echo -e "09 $_RED[KO] $_DEF"
-			fi
-		fi
-	fi;
+	RES=$(cat 09 | xargs)
+	case $RES in
+		"w"|"who"|"users")
+			echo -e "09 $_GREEN[OK] $_DEF";;
+		*)
+			echo -e "09 $_RED[KO] $_DEF";;
+	esac
 	sleep 0.5
 	#question 10
 	cat 10 | grep "fdisk -l" > /dev/null
