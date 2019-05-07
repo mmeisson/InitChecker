@@ -87,7 +87,7 @@ function networkpart()
 	#question 4
 	RES=$(sh 04)
 	RRES=$(route -n get default | grep 'gateway' | awk '{print$2}')
-	if [ "$RES" == "$RRES" ]; then
+	if [[ "$RES" == *"$RRES"* ]]; then
 		echo -e "04 $_GREEN[OK] $_DEF"
 	else
 		echo -e "04 $_RED[KO] $_DEF"
