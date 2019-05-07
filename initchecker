@@ -111,7 +111,7 @@ function networkpart()
 	echo -e "06 : $RES"
 	sleep .5
 	#question 7
-	RES=$(cat 07)
+	RES=$(cat 07 | xargs)
 	case $RES in
 		"nslookup slash16.org 8.8.8.8")
 			echo -e "07 $_GREEN[OK] $_DEF";;
@@ -175,7 +175,7 @@ function networkpart()
 	sleep .5
 	#question 12
 	RES=$(sh 12)
-	RRES=$(ipconfig getpacket en0 | grep yi | awk '{print $3}')
+	RRES=$(ipconfig getpacket en0 | awk '/yi/ {print $3}')
 	if [ "$RES" == "$RRES" ]; then
 		echo -e "12 $_GREEN[OK] $_DEF"
 	else
