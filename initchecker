@@ -402,17 +402,13 @@ function systempart()
 	echo -e "23 : $ES"
 		sleep 0.5
 	#question 24
-	cat 24 | grep "dpkg" > /dev/null
-	if [ $? ==  0 ]; then
-		echo -e "24 $_GREEN[OK] $_DEF"
-	else
-		cat 24 | grep "apt" > /dev/null
-		if [ $? ==  0 ]; then
-			echo -e "24 $_GREEN[OK] $_DEF"
-		else
+	RES=$(cat 24 | xargs)
+	case $RES in
+		"dpkg"* | "apt"*)
+			echo -e "24 $_GREEN[OK] $_DEF";;
+		*)
 			echo -e "24 $_RED[KO] $_DEF"
-		fi
-	fi
+	esac
 }
 
 function scriptpart()
